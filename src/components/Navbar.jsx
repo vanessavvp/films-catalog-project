@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <VStack p={10}>
       <Flex w='100%'>
-        <Heading ml='10' as='h1' size='3xl'>Films catalog.</Heading>
+        <Heading as='h1' size='3xl'>Films catalog.</Heading>
         <Spacer></Spacer>
         <ButtonGroup variant='ghost' spacing='6'>
           <Button colorScheme='purple' size='lg'>
