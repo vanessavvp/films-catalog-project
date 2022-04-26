@@ -7,7 +7,7 @@ const Navbar = () => {
       <Flex w='100%'>
         <Heading as='h1' size='3xl'>Films catalog.</Heading>
         <Spacer></Spacer>
-        <ButtonGroup variant='ghost' spacing='6'>
+        <ButtonGroup variant='outline' spacing='6'>
           <Button colorScheme='purple' size='lg'>
             <Link to='/'>Home</Link>
           </Button>

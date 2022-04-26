@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import ItemCard from './itemCard'
 
-const FilmsDisplayer = (props) => {
+const CastDisplayer = (props) => {
   return (
     <Box
       margin='20px'
@@ -14,12 +14,12 @@ const FilmsDisplayer = (props) => {
       columnGap='10px'
     >
       {
-        props.films.map((film, index) => {
-          return (<ItemCard key={index} img={film.poster_path}></ItemCard>)
+        props.cast.map((person, index) => {
+          return (<ItemCard key={index} img={person.profile_path}></ItemCard>)
         })
       }
     </Box>
   )
 }
 
-export default FilmsDisplayer
+export default CastDisplayer
