@@ -9,6 +9,10 @@ const Discover = () => {
   const [rating, setRating] = useState(0)
   const [releaseDate, setReleaseDate] = useState('') // "2010-08-30"
 
+  const handleSubmit = () => {
+
+  }
+
   useEffect(() => {
   }, [genres])
 
@@ -40,7 +44,7 @@ const Discover = () => {
             borderRadius='lg'
             borderWidth='1px'
             bg='#8e94f2'
-          ><FilmFilters></FilmFilters></Box>
+          ><FilmFilters handleSubmit={handleSubmit}></FilmFilters></Box>
           <Box marginTop ='5px'><FilmsDisplayer films={[]}></FilmsDisplayer></Box>
         </Box>
       </Stack>
