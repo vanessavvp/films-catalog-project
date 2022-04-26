@@ -1,19 +1,19 @@
-import { Box, Button, ButtonGroup } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
+import { Box, Button, ButtonGroup, Divider, Heading, Stack } from '@chakra-ui/react'
 import Navbar from '../components/Navbar'
 import Searchbar from '../components/Searchbar'
-import FilmsDisplayer from '../components/FilmsDisplayer'
-import { useEffect, useState } from 'react'
-import CastDisplayer from '../components/CastDisplayer'
-import CompaniesDisplayer from '../components/CompaniesDisplayer'
+import FilmsDisplayer from '../components/displayers/FilmsDisplayer'
+import CastDisplayer from '../components/displayers/CastDisplayer'
+import CompaniesDisplayer from '../components/displayers/CompaniesDisplayer'
 
 const api_key = import.meta.env.VITE_MOVIEDB
 const Home = () => {
-  const [films, setFilms] = useState([])
   const [cast, setCast] = useState([])
+  const [films, setFilms] = useState([])
   const [companies, setCompanies] = useState([])
+  const [searchInput, setSearchInput] = useState('')
   const [filterParameter, setFilterParameter] = useState('film')
-  const [displayer, setDisplayer] = useState(<FilmsDisplayer films={films}/>)
-  const [searchInput, setSearchInput] = useState('harry potter')
+  const [nowPlaying, setNowPlaying] = useState([])
 
   const handleSubmit = (input) => {
     setSearchInput(input)
@@ -23,8 +23,15 @@ const Home = () => {
     setFilterParameter(event.target.value)
   }
 
+  const fetchNowPlaying = async () => {
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}`)
+      .then(response => response.json())
+      .then(data => {
+        setNowPlaying(data.results)
+      })
+  }
+
   const fetchFilms = async () => {
-    console.log(searchInput) // FIX VARIABLE VALUE
     fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchInput}`)
       .then(response => response.json())
       .then(data => {
@@ -49,17 +56,15 @@ const Home = () => {
   }
 
   const fetchInfo = () => {
-    if (filterParameter === 'film') {
-      fetchFilms()
-      // setDisplayer(<FilmsDisplayer films={films} />)
-    } else if (filterParameter === 'cast') {
-      fetchCast()
-      // setDisplayer(<CastDisplayer cast={cast} />)
-    } else if (filterParameter === 'companies') {
-      fetchCompanies()
-      // setCompanies(<CompaniesDisplayer companies={companies} />)
-    }
+    if (searchInput === '') fetchNowPlaying()
+    else if (filterParameter === 'film') fetchFilms()
+    else if (filterParameter === 'cast') fetchCast()
+    else if (filterParameter === 'companies') fetchCompanies()
   }
+
+  useEffect(() => {
+    fetchInfo()
+  }, [nowPlaying])
 
   useEffect(() => {
     fetchInfo()
@@ -72,23 +77,18 @@ const Home = () => {
   return (
     <Box>
       <Navbar />
-      <Searchbar onHandleSubmit={handleSubmit} />
-      <Box
-        margin='20px'
-        marginLeft='50px'
-        display='flex'
-        flexWrap='wrap'
-        alignContent='space-around'
-      >
-        <ButtonGroup variant='outline'>
+      <Stack p={10}>
+        <Searchbar onHandleSubmit={handleSubmit} />
+        <ButtonGroup variant='outline' colorScheme='purple'>
           <Button value='film' onClick={handleClick}>Films</Button>
           <Button value='cast' onClick={handleClick}>Cast</Button>
           <Button value='companies' onClick={handleClick}>Production companies</Button>
         </ButtonGroup>
-      </Box>
-      {(filterParameter === 'film') ? <FilmsDisplayer films={films} /> : null }
-      {(filterParameter === 'cast') ? <CastDisplayer cast={cast} /> : null}
-      {(filterParameter === 'companies') ? <CompaniesDisplayer companies={companies} /> : null}
+        {(searchInput === '') ? <FilmsDisplayer search="Now playing films" films={nowPlaying} /> : null}
+        {(filterParameter === 'film') ? <FilmsDisplayer search={searchInput} films={films} /> : null }
+        {(filterParameter === 'cast') ? <CastDisplayer search={searchInput} cast={cast} /> : null}
+        {(filterParameter === 'companies') ? <CompaniesDisplayer search={searchInput} companies={companies} /> : null}
+      </Stack>
     </Box>
   )
 }

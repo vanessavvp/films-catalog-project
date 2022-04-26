@@ -20,7 +20,7 @@ const Searchbar = (props) => {
       display='flex'
       justifyContent='center'
     >
-      <Box w='95%'>
+      <Box w='98%'>
         <form onSubmit={handleSubmit}>
           <Input
             variant='filled'
