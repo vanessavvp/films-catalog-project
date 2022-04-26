@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import ItemCard from './itemCard'
 
-const CompanieDisplayer = (props) => {
+const CompaniesDisplayer = (props) => {
   return (
     <Box
       margin='20px'
@@ -22,4 +22,4 @@ const CompanieDisplayer = (props) => {
   )
 }
 
-export default CompanieDisplayer
+export default CompaniesDisplayer

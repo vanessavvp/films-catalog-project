@@ -1,13 +1,13 @@
 import { Box, Image } from '@chakra-ui/react'
 
-const ItemCard = (props) => {
+const ItemCard = ({ img }) => {
   return (
-    <Box w='15%' h='25%' borderRadius='lg' overflow='hidden'>
+    <Box w='10%' borderRadius='lg' borderColor='gray' overflow='hidden'>
       {
-        props.img !== null
+        img !== null
           ? <Image
             borderRadius='lg'
-            src={`http://image.tmdb.org/t/p/w500${props.img}`}
+            src={`http://image.tmdb.org/t/p/w500${img}`}
             alt='Film card' />
           : <Image
             borderRadius='lg'
