@@ -4,23 +4,28 @@ import FilmsDisplayer from '../components/displayers/FilmsDisplayer'
 import FilmFilters from '../components/filters/FilmFilters'
 import Navbar from '../components/Navbar'
 
+const api_key = import.meta.env.VITE_MOVIEDB
 const Discover = () => {
-  const [genres, setGenres] = useState([])
-  const [rating, setRating] = useState(0)
-  const [releaseDate, setReleaseDate] = useState('') // "2010-08-30"
+  const [querys, setQuerys] = useState('')
+  const [discoverResult, setDiscoverResult] = useState([])
 
-  const handleSubmit = () => {
+  const handleClick = (input) => {
+    setQuerys(input)
+  }
 
+  const fetchDiscover = () => {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&release_date.gte=${querys}`)
+    // fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&release_date.gte="1999-10-10"`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.results)
+        setDiscoverResult(data.results)
+      })
   }
 
   useEffect(() => {
-  }, [genres])
-
-  useEffect(() => {
-  }, [rating])
-
-  useEffect(() => {
-  }, [releaseDate])
+    fetchDiscover()
+  }, [querys])
 
   return (
     <Box >
@@ -30,7 +35,6 @@ const Discover = () => {
         <Divider />
         <Box
           display='flex'
-          direction='column'
           justifyContent='flex-start'
           alignItems='flex-start'
           alignContent='stretch'
@@ -44,8 +48,8 @@ const Discover = () => {
             borderRadius='lg'
             borderWidth='1px'
             bg='#8e94f2'
-          ><FilmFilters handleSubmit={handleSubmit}></FilmFilters></Box>
-          <Box marginTop ='5px'><FilmsDisplayer films={[]}></FilmsDisplayer></Box>
+          ><FilmFilters handleClick={handleClick}></FilmFilters></Box>
+          <Box marginTop ='5px'><FilmsDisplayer films={discoverResult}></FilmsDisplayer></Box>
         </Box>
       </Stack>
     </Box>

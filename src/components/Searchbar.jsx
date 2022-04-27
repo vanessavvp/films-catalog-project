@@ -1,12 +1,12 @@
 import { Box, Input } from '@chakra-ui/react'
 import { useState } from 'react'
 
-const Searchbar = (props) => {
+const Searchbar = ({ onHandleSubmit }) => {
   const [searchInput, setSearchInput] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    if (searchInput.length > 0) props.onHandleSubmit(searchInput)
+    if (searchInput.length > 0) onHandleSubmit(searchInput)
   }
 
   const handleChange = (event) => {
