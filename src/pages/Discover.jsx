@@ -16,10 +16,7 @@ const Discover = () => {
   const fetchDiscover = () => {
     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}${querys}&include_adult=false`)
       .then(response => response.json())
-      .then(data => {
-        console.log(data.results)
-        setDiscoverResult(data.results)
-      })
+      .then(data => setDiscoverResult(data.results))
   }
 
   useEffect(() => {

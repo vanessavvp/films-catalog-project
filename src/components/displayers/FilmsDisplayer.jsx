@@ -17,7 +17,7 @@ const FilmsDisplayer = ({ search = '', films }) => {
         { (search !== '') ? (<Divider w='95%'></Divider>) : null }
         {
           films.map((film, index) => {
-            return (<ItemCard key={index} img={film.poster_path}></ItemCard>)
+            return (<ItemCard key={index} img={film.poster_path} filmId={film.id}></ItemCard>)
           })
         }
       </Box>

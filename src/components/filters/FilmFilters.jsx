@@ -1,4 +1,4 @@
-import { Box, Button, Heading } from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 import { useState } from 'react'
 import GenreFilter from './GenreFilter'
 import RatingFilter from './RatingFilter'
@@ -29,24 +29,24 @@ const FilmFilters = ({ handleClick }) => {
     console.log(input)
     setSelectedGenres(input)
   }
-  // FIXXXXX FLEXXX
-  return (<>
-    <Box
-      margin='20px'
-      padding={7}
-      borderRadius='xl'
-      bg='#8e94f2'
-      gap='20px'
-      h='100%'
-    >
-      <GenreFilter handleOnChange={handleCheckboxs}></GenreFilter>
-      <RatingFilter handleOnChangeEnd={handleOnChangeEnd}></RatingFilter>
-      <ReleaseDateFilter handleOnChange={handleOnChange}></ReleaseDateFilter>
-      <Box display='flex' justifyContent='center'>
-        <Button w='100%' variant='solid' color='black' value='search' onClick={handleOnClick}>Search</Button>
+  return (
+    <>
+      <Box
+        margin='20px'
+        padding={7}
+        borderRadius='xl'
+        bg='#8e94f2'
+        gap='20px'
+        h='100%'
+      >
+        <GenreFilter handleOnChange={handleCheckboxs}></GenreFilter>
+        <RatingFilter handleOnChangeEnd={handleOnChangeEnd}></RatingFilter>
+        <ReleaseDateFilter handleOnChange={handleOnChange}></ReleaseDateFilter>
+        <Box display='flex' justifyContent='center'>
+          <Button w='100%' variant='solid' color='black' value='search' onClick={handleOnClick}>Search</Button>
+        </Box>
       </Box>
-    </Box>
-  </>
+    </>
   )
 }
 

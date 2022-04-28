@@ -21,6 +21,7 @@
         "react/react-in-jsx-scope": "off",
         "camelcase": "off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "indent": ["error", 2]
+        "indent": ["error", 2],
+        "react/prop-types": "off"
     }
 }

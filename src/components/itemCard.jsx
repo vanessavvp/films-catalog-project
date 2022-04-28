@@ -1,20 +1,21 @@
-import { Box, Image } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Box, Image, Link } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
-const ItemCard = ({ img }) => {
-  const handleClick = (event) => {
-    console.log('aqui')
-  }
+const ItemCard = ({ img, filmId = '' }) => {
+  const navigate = useNavigate()
+
   return (
-    <Box width='18%' borderRadius='xl' overflow='hidden' borderWidth='1px' onClick={handleClick}>
+    <>
       {
         img !== null
-          ? (<Image
-            src={`http://image.tmdb.org/t/p/w500${img}`}
-            alt='Film card' />)
+          ? (<Box width='18%' borderRadius='xl' overflow='hidden' borderWidth='1px' onClick={() => navigate(`/details/${filmId}`)}>
+            <Image
+              src={`http://image.tmdb.org/t/p/w500${img}`}
+              alt='Film card' />
+          </Box>)
           : null
       }
-    </Box>
+    </>
   )
 }
 
