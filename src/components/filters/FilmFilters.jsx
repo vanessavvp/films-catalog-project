@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Button, Heading } from '@chakra-ui/react'
 import { useState } from 'react'
 import GenreFilter from './GenreFilter'
 import RatingFilter from './RatingFilter'
@@ -6,7 +6,7 @@ import ReleaseDateFilter from './ReleaseDateFilter'
 
 const FilmFilters = ({ handleClick }) => {
   const [releaseDate, setReleaseDate] = useState('yyyy-MM-dd')
-  const [minimumRating, setMinimumRating] = useState('')
+  const [minimumRating, setMinimumRating] = useState(0)
   const [selectedGenres, setSelectedGenres] = useState([])
 
   const handleOnClick = () => {
@@ -24,19 +24,24 @@ const FilmFilters = ({ handleClick }) => {
   const handleOnChangeEnd = (input) => {
     setMinimumRating(input)
   }
-
-  return (
+  // FIXXXXX FLEXXX
+  return (<>
     <Box
+      margin='20px'
       padding={7}
-      flexWrap='wrap'
       borderRadius='xl'
       bg='#8e94f2'
+      gap='20px'
+      h='100%'
     >
       <GenreFilter></GenreFilter>
       <RatingFilter handleOnChangeEnd={handleOnChangeEnd}></RatingFilter>
       <ReleaseDateFilter handleOnChange={handleOnChange}></ReleaseDateFilter>
-      <Button variant='solid' color='black' value='search' onClick={handleOnClick}>Search</Button>
+      <Box display='flex' justifyContent='center'>
+        <Button w='100%' variant='solid' color='black' value='search' onClick={handleOnClick}>Search</Button>
+      </Box>
     </Box>
+  </>
   )
 }
 

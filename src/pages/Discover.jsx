@@ -33,10 +33,10 @@ const Discover = () => {
         <Heading as='h3' size='xl'>Discover films</Heading>
         <Divider />
         <Spacer></Spacer>
-        <Stack direction='row'>
+        <Box display='flex'>
           <FilmFilters handleClick={handleClick}></FilmFilters>
           <FilmsDisplayer films={discoverResult}></FilmsDisplayer>
-        </Stack>
+        </Box>
       </Stack>
     </Box>
   )

@@ -24,7 +24,7 @@ const Home = () => {
   }
 
   const fetchNowPlaying = async () => {
-    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}`)
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&include_adult=false`)
       .then(response => response.json())
       .then(data => {
         setNowPlaying(data.results)
@@ -80,7 +80,7 @@ const Home = () => {
       <Stack p={10}>
         <Searchbar onHandleSubmit={handleSubmit} />
         <Box display='flex' justifyContent='center'>
-          <ButtonGroup variant='outline' color='#6247aa'>
+          <ButtonGroup variant='solid' colorScheme='purple'>
             <Button value='film' onClick={handleClick}>Films</Button>
             <Button value='cast' onClick={handleClick}>Cast</Button>
             <Button value='companies' onClick={handleClick}>Production companies</Button>

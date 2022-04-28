@@ -6,9 +6,9 @@ const ReleaseDateFilter = ({ handleOnChange }) => {
   }
 
   return (
-    <Box>
+    <Box marginTop='10px' marginBottom='30px'>
       <Heading as='h3' size='lg' color='white'>Release date</Heading>
-      <Input type='date' defaultValue='yyyy-MM-dd' onChange={handleChange} color='white'></Input>
+      <Input type='date' defaultValue='yyyy-MM-dd' onChange={handleChange} color='white' marginTop='10px'></Input>
     </Box>
   )
 }
