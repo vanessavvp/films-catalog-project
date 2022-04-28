@@ -24,6 +24,11 @@ const FilmFilters = ({ handleClick }) => {
   const handleOnChangeEnd = (input) => {
     setMinimumRating(input)
   }
+
+  const handleCheckboxs = (input) => {
+    console.log(input)
+    setSelectedGenres(input)
+  }
   // FIXXXXX FLEXXX
   return (<>
     <Box
@@ -34,7 +39,7 @@ const FilmFilters = ({ handleClick }) => {
       gap='20px'
       h='100%'
     >
-      <GenreFilter></GenreFilter>
+      <GenreFilter handleOnChange={handleCheckboxs}></GenreFilter>
       <RatingFilter handleOnChangeEnd={handleOnChangeEnd}></RatingFilter>
       <ReleaseDateFilter handleOnChange={handleOnChange}></ReleaseDateFilter>
       <Box display='flex' justifyContent='center'>
