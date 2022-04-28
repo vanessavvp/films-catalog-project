@@ -6,21 +6,34 @@ import ReleaseDateFilter from './ReleaseDateFilter'
 
 const FilmFilters = ({ handleClick }) => {
   const [releaseDate, setReleaseDate] = useState('yyyy-MM-dd')
+  const [minimumRating, setMinimumRating] = useState('')
+  const [selectedGenres, setSelectedGenres] = useState([])
 
   const handleOnClick = () => {
-    // AQUI SI TAL HACER EL STRING QUE DEVUELVE PARA EL FETCH
-    handleClick(releaseDate)
+    let query = ''
+    if (releaseDate !== 'yyyy-MM-dd') query += `&release_date.gte=${releaseDate}`
+    if (minimumRating !== '') query += `&vote_average.gte=${minimumRating}`
+    if (selectedGenres.length > 0) query += `&with_genres=${selectedGenres}`
+    handleClick(query)
   }
 
   const handleOnChange = (input) => {
     setReleaseDate(input)
-    console.log(input)
+  }
+
+  const handleOnChangeEnd = (input) => {
+    setMinimumRating(input)
   }
 
   return (
-    <Box>
+    <Box
+      padding={7}
+      flexWrap='wrap'
+      borderRadius='xl'
+      bg='#8e94f2'
+    >
       <GenreFilter></GenreFilter>
-      <RatingFilter></RatingFilter>
+      <RatingFilter handleOnChangeEnd={handleOnChangeEnd}></RatingFilter>
       <ReleaseDateFilter handleOnChange={handleOnChange}></ReleaseDateFilter>
       <Button variant='solid' color='black' value='search' onClick={handleOnClick}>Search</Button>
     </Box>

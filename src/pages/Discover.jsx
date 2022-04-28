@@ -1,4 +1,4 @@
-import { Box, Divider, Heading, Stack } from '@chakra-ui/react'
+import { Box, Divider, Heading, Spacer, Stack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import FilmsDisplayer from '../components/displayers/FilmsDisplayer'
 import FilmFilters from '../components/filters/FilmFilters'
@@ -14,8 +14,7 @@ const Discover = () => {
   }
 
   const fetchDiscover = () => {
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&release_date.gte=${querys}`)
-    // fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&release_date.gte="1999-10-10"`)
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}${querys}&include_adult=false`)
       .then(response => response.json())
       .then(data => {
         console.log(data.results)
@@ -28,29 +27,16 @@ const Discover = () => {
   }, [querys])
 
   return (
-    <Box >
+    <Box>
       <Navbar></Navbar>
-      <Stack p={10}>
+      <Stack p={10} >
         <Heading as='h3' size='xl'>Discover films</Heading>
         <Divider />
-        <Box
-          display='flex'
-          justifyContent='flex-start'
-          alignItems='flex-start'
-          alignContent='stretch'
-          flexWrap='wrap'
-          rowGap='12px'
-          columnGap='12px'
-          w='50%'
-        >
-          <Box
-            marginTop ='5px'
-            borderRadius='lg'
-            borderWidth='1px'
-            bg='#8e94f2'
-          ><FilmFilters handleClick={handleClick}></FilmFilters></Box>
-          <Box marginTop ='5px'><FilmsDisplayer films={discoverResult}></FilmsDisplayer></Box>
-        </Box>
+        <Spacer></Spacer>
+        <Stack direction='row'>
+          <FilmFilters handleClick={handleClick}></FilmFilters>
+          <FilmsDisplayer films={discoverResult}></FilmsDisplayer>
+        </Stack>
       </Stack>
     </Box>
   )

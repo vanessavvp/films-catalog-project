@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Box, Button, ButtonGroup, Divider, Heading, Stack } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Divider, Heading, Spacer, Stack } from '@chakra-ui/react'
 import Navbar from '../components/Navbar'
 import Searchbar from '../components/Searchbar'
 import FilmsDisplayer from '../components/displayers/FilmsDisplayer'
@@ -32,7 +32,7 @@ const Home = () => {
   }
 
   const fetchFilms = async () => {
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchInput}`)
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchInput}&include_adult=false`)
       .then(response => response.json())
       .then(data => {
         setFilms(data.results)
@@ -79,11 +79,14 @@ const Home = () => {
       <Navbar />
       <Stack p={10}>
         <Searchbar onHandleSubmit={handleSubmit} />
-        <ButtonGroup variant='outline' colorScheme='purple'>
-          <Button value='film' onClick={handleClick}>Films</Button>
-          <Button value='cast' onClick={handleClick}>Cast</Button>
-          <Button value='companies' onClick={handleClick}>Production companies</Button>
-        </ButtonGroup>
+        <Box display='flex' justifyContent='center'>
+          <ButtonGroup variant='outline' color='#6247aa'>
+            <Button value='film' onClick={handleClick}>Films</Button>
+            <Button value='cast' onClick={handleClick}>Cast</Button>
+            <Button value='companies' onClick={handleClick}>Production companies</Button>
+          </ButtonGroup>
+        </Box>
+        <Spacer></Spacer>
         {(searchInput === '') ? <FilmsDisplayer search="Now playing films" films={nowPlaying} /> : null}
         {(filterParameter === 'film') ? <FilmsDisplayer search={searchInput} films={films} /> : null }
         {(filterParameter === 'cast') ? <CastDisplayer search={searchInput} cast={cast} /> : null}

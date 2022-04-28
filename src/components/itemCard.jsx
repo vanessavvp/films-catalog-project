@@ -4,9 +4,8 @@ const ItemCard = ({ img }) => {
   return (<>
     {
       img !== null
-        ? (<Box w='10%' borderRadius='xl' overflow='hidden'>
+        ? (<Box w='18%' borderRadius='xl' overflow='hidden' borderWidth='1px'>
           <Image
-            borderRadius='lg'
             src={`http://image.tmdb.org/t/p/w500${img}`}
             alt='Film card' />
         </Box>)
