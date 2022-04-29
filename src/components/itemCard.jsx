@@ -7,7 +7,7 @@ const ItemCard = ({ img = '', filmId = '' }) => {
   return (
     <>
       {
-        img !== ''
+        img !== null
           ? (<Box w='300px' borderRadius='xl' overflow='hidden' borderWidth='1px' onClick={() => filmId !== '' ? navigate(`/details/${filmId}`) : null}>
             <Image
               src={`http://image.tmdb.org/t/p/w500${img}`}
