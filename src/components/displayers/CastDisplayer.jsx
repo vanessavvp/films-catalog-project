@@ -17,7 +17,7 @@ const CastDisplayer = ({ search = '', cast }) => {
         <Heading as='h3' size='l'>Results for: {search}</Heading>
         <Divider></Divider>
         {
-          cast.map((person, index) => {
+          cast?.map((person, index) => {
             return (<ItemCard key={index} img={person.profile_path}></ItemCard>)
           })
         }

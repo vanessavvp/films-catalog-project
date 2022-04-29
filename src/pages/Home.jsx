@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Box, Button, ButtonGroup, Divider, Heading, Spacer, Stack } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Spacer, Stack } from '@chakra-ui/react'
 import Navbar from '../components/Navbar'
 import Searchbar from '../components/Searchbar'
 import FilmsDisplayer from '../components/displayers/FilmsDisplayer'

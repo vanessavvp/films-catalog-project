@@ -17,7 +17,7 @@ const CompaniesDisplayer = ({ search = '', companies }) => {
         <Heading as='h3' size='l'>Results for: {search}</Heading>
         <Divider></Divider>
         {
-          companies.map((companie, index) => {
+          companies?.map((companie, index) => {
             return (<ItemCard key={index} img={companie.logo_path}></ItemCard>)
           })
         }

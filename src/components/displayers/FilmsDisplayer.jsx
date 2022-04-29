@@ -16,7 +16,7 @@ const FilmsDisplayer = ({ search = '', films }) => {
         { (search !== '') ? (<Heading as='h3' size='l'>Results for: {search}</Heading>) : null }
         { (search !== '') ? (<Divider w='95%'></Divider>) : null }
         {
-          films.map((film, index) => {
+          films?.map((film, index) => {
             return (<ItemCard key={index} img={film.poster_path} filmId={film.id}></ItemCard>)
           })
         }

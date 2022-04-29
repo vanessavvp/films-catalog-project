@@ -2,6 +2,7 @@ import { Box, Divider, Heading, Stack } from '@chakra-ui/react'
 import Navbar from '../components/Navbar'
 
 const Favorites = () => {
+  const [favFilms, setFavFilms] = useState([])
   return (
     <Box >
       <Navbar></Navbar>
