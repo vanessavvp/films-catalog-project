@@ -15,12 +15,11 @@ const Searchbar = ({ onHandleSubmit }) => {
 
   return (
     <Box
-      margin='20px'
-      marginLeft='20px'
+      p={3}
       display='flex'
       justifyContent='center'
     >
-      <Box w='98%'>
+      <Box w='800px'>
         <form onSubmit={handleSubmit}>
           <Input
             variant='filled'

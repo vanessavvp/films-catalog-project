@@ -1,1 +1,3 @@
-const api_key = import.meta.env.VITE_MOVIEDB
+const apiKey = import.meta.env.VITE_MOVIEDB
+
+export default apiKey

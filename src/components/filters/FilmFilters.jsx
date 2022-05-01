@@ -30,23 +30,21 @@ const FilmFilters = ({ handleClick }) => {
     setSelectedGenres(input)
   }
   return (
-    <>
-      <Box
-        margin='20px'
-        padding={7}
-        borderRadius='xl'
-        bg='#8e94f2'
-        gap='20px'
-        h='100%'
-      >
-        <GenreFilter handleOnChange={handleCheckboxs}></GenreFilter>
-        <RatingFilter handleOnChangeEnd={handleOnChangeEnd}></RatingFilter>
-        <ReleaseDateFilter handleOnChange={handleOnChange}></ReleaseDateFilter>
-        <Box display='flex' justifyContent='center'>
-          <Button w='100%' variant='solid' color='black' value='search' onClick={handleOnClick}>Search</Button>
-        </Box>
+    <Box
+      padding={7}
+      borderRadius='xl'
+      bg='#8e94f2'
+      gap='20px'
+      h='100%'
+      boxSize='20%'
+    >
+      <GenreFilter handleOnChange={handleCheckboxs}></GenreFilter>
+      <RatingFilter handleOnChangeEnd={handleOnChangeEnd}></RatingFilter>
+      <ReleaseDateFilter handleOnChange={handleOnChange}></ReleaseDateFilter>
+      <Box display='flex' justifyContent='center'>
+        <Button w='100%' variant='solid' color='black' value='search' onClick={handleOnClick}>Search</Button>
       </Box>
-    </>
+    </Box>
   )
 }
 

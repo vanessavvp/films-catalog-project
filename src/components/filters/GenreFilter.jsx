@@ -32,7 +32,7 @@ const GenreFilter = ({ handleOnChange }) => {
     <Box>
       <Heading as='h3' size='lg' color='white'>Genres</Heading>
       <CheckboxGroup>
-        <Stack p={1} spacing={[2, 1]} direction={['row', 'column']}>
+        <Stack p={2} spacing={[2, 1]} direction={['row', 'column']}>
           {
             genres.map(({ id, name }) => {
               return (<Checkbox
@@ -41,7 +41,7 @@ const GenreFilter = ({ handleOnChange }) => {
                 checked={checkedItems.indexOf(id) !== -1}
                 onChange={() => handleChange(id)}
               >
-                <Text color='white'>{name}</Text>
+                <Text fontSize='xl' color='white'>{name}</Text>
               </Checkbox>)
             })
           }

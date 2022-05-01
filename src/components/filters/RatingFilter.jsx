@@ -10,7 +10,7 @@ const RatingFilter = ({ handleOnChangeEnd }) => {
         colorScheme='black'
         onChangeEnd={value => handleOnChangeEnd(value)}
         margin='10px'
-        w='90%'>
+        w='96%'>
         <SliderTrack>
           <SliderFilledTrack />
         </SliderTrack>

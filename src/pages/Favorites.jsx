@@ -1,4 +1,5 @@
 import { Box, Divider, Heading, Stack } from '@chakra-ui/react'
+import { useState } from 'react'
 import Navbar from '../components/Navbar'
 
 const Favorites = () => {
