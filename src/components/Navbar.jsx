@@ -35,7 +35,7 @@ const Navbar = () => {
         <ButtonGroup variant='solid' spacing='6' color='#6247aa' size='lg'>
           <Button><Link to='/'>Home</Link></Button>
           <Button><Link to='/discover'>Discover</Link></Button>
-          <Button><Link to='/favorites'>Favorites</Link></Button>
+          { isUserLogged && <Button><Link to='/favorites'>Favorites</Link></Button> }
           {
             isUserLogged ? <Button variant='outline' colorScheme='purple' rightIcon={<BiUser />} onClick={handleLogOut}>Log out</Button> : <Button variant='outline' colorScheme='purple' rightIcon={<BiUser />} onClick={handleLogIn}>Log in</Button>
           }
