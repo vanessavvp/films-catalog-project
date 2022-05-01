@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Box, Button, ButtonGroup, Spacer, Stack } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Spacer, Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import Navbar from '../components/Navbar'
 import Searchbar from '../components/Searchbar'
 import FilmsDisplayer from '../components/displayers/FilmsDisplayer'
@@ -14,6 +14,7 @@ const Home = () => {
   const [searchInput, setSearchInput] = useState('')
   const [filterParameter, setFilterParameter] = useState('film')
   const [nowPlaying, setNowPlaying] = useState([])
+  const [popularFilms, setPopularFilms] = useState([])
 
   const handleSubmit = (input) => {
     setSearchInput(input)
@@ -28,6 +29,14 @@ const Home = () => {
       .then(response => response.json())
       .then(data => {
         setNowPlaying(data.results)
+      })
+  }
+
+  const fetchPopularFilms = async () => {
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&include_adult=false`)
+      .then(response => response.json())
+      .then(data => {
+        setPopularFilms(data.results)
       })
   }
 
@@ -56,8 +65,10 @@ const Home = () => {
   }
 
   const fetchInfo = () => {
-    if (searchInput === '') fetchNowPlaying()
-    else if (filterParameter === 'film') fetchFilms()
+    if (searchInput === '') {
+      fetchNowPlaying()
+      fetchPopularFilms()
+    } else if (filterParameter === 'film') fetchFilms()
     else if (filterParameter === 'cast') fetchCast()
     else if (filterParameter === 'companies') fetchCompanies()
   }
@@ -86,8 +97,25 @@ const Home = () => {
             <Button value='companies' onClick={handleClick}>Production companies</Button>
           </ButtonGroup>
         </Box>
-        <Spacer></Spacer>
-        {(searchInput === '') ? <FilmsDisplayer search="Now playing films" films={nowPlaying} /> : null}
+        <Spacer />
+        <Spacer />
+
+        {(searchInput === '')
+          ? <Tabs size='lg'align='center' variant='soft-rounded' colorScheme='blackAlpha'>
+            <TabList >
+              <Tab>Now playing films</Tab>
+              <Tab>Most popular films</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <FilmsDisplayer films={nowPlaying}></FilmsDisplayer>
+              </TabPanel>
+              <TabPanel>
+                <FilmsDisplayer films={popularFilms}></FilmsDisplayer>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+          : null}
         {(filterParameter === 'film') ? <FilmsDisplayer search={searchInput} films={films} /> : null }
         {(filterParameter === 'cast') ? <CastDisplayer search={searchInput} cast={cast} /> : null}
         {(filterParameter === 'companies') ? <CompaniesDisplayer search={searchInput} companies={companies} /> : null}

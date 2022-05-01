@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Heading } from '@chakra-ui/react'
+import { Box, Divider, Heading } from '@chakra-ui/react'
 import ItemCard from '../itemCard'
 
 const FilmsDisplayer = ({ search = '', films }) => {
@@ -11,6 +11,7 @@ const FilmsDisplayer = ({ search = '', films }) => {
       rowGap='12px'
       columnGap='12px'
       boxSize='100%'
+      marginLeft='6px'
     >
       { (search !== '') ? (<Heading as='h3' size='l'>Results for: {search}</Heading>) : null }
       { (search !== '') ? (<Divider w='95%'></Divider>) : null }
