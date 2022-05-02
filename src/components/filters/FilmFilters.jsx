@@ -17,17 +17,9 @@ const FilmFilters = ({ handleClick }) => {
     handleClick(query)
   }
 
-  const handleOnChange = (input) => {
-    setReleaseDate(input)
-  }
-
-  const handleOnChangeEnd = (input) => {
-    setMinimumRating(input)
-  }
-
-  const handleCheckboxs = (input) => {
-    setSelectedGenres(input)
-  }
+  const handleOnChange = (input) => setReleaseDate(input)
+  const handleOnChangeEnd = (input) => setMinimumRating(input)
+  const handleCheckboxs = (input) => setSelectedGenres(input)
 
   return (
     <Box
