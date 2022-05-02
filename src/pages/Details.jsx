@@ -90,7 +90,7 @@ const Details = () => {
   }
 
   useEffect(() => {
-    fetchFavFilms()
+    if (isLogged) fetchFavFilms()
     fetchFilmInfo()
     fetchCast()
     fetchTrailer()
