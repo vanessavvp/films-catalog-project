@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom'
 import ItemCard from '../components/itemCard'
 import Navbar from '../components/Navbar'
 import apiKey from '../services/filmsAPI'
-import FilmsDisplayer from '../components/displayers/FilmsDisplayer'
 import CastDisplayer from '../components/displayers/CastDisplayer'
 
 const Details = () => {
@@ -74,7 +73,7 @@ const Details = () => {
     fetch(`https://api.themoviedb.org/3/account/12289456/favorite/movies?api_key=${apiKey}&sort_by=created_at&session_id=${window.localStorage.getItem('session-ID')}`)
       .then(response => response.json())
       .then(data => {
-        const isFavFilm = data.results?.filter(film => film.id === parseInt(filmId))
+        const isFavFilm = data.results?.filter(({ id }) => id === parseInt(filmId))
         if (isFavFilm.length > 0) setIsFavorite(true)
       })
   }

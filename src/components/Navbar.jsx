@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <VStack p={10} margin={10}>
       <Flex w='100%' alignItems='center'>
-        <Heading as='h1' size='3xl'>Films catalog.</Heading>
+        <Heading as='h1' size='3xl'><Link to='/'>Films catalog.</Link></Heading>
         <Spacer></Spacer>
         <ButtonGroup variant='solid' spacing='6' color='#6247aa' size='lg'>
           <Button><Link to='/'>Home</Link></Button>

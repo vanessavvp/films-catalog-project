@@ -29,7 +29,7 @@ const Logged = () => {
   return (<Box >
     <VStack p={10}>
       <Flex w='100%' direction='column'>
-        <Heading as='h1' size='3xl'>Films catalog.</Heading>
+        <Heading as='h1' size='3xl'><Link to='/'>Films catalog.</Link></Heading>
         <Spacer></Spacer>
         <Box display='flex' flexDirection='row' justifyContent='center' marginTop={10} gap='20px'>
           <Heading as='h3' size='xl'>Sucessful login!</Heading>
