@@ -14,8 +14,8 @@ const CastDisplayer = ({ search = '', cast }) => {
         rowGap='12px'
         columnGap='12px'
       >
-        { (search !== '') ? (<Heading as='h3' size='l'>Results for: {search}</Heading>) : null }
-        { (search !== '') ? (<Divider w='95%'></Divider>) : null }
+        { (search !== '') && (<Heading as='h3' size='l'>Results for: {search}</Heading>) }
+        { (search !== '') && (<Divider w='95%'></Divider>) }
         {
           cast?.map((person, index) => {
             return (<ItemCard key={index} img={person.profile_path}></ItemCard>)

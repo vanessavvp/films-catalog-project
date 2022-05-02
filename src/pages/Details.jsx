@@ -7,6 +7,7 @@ import ItemCard from '../components/itemCard'
 import Navbar from '../components/Navbar'
 import apiKey from '../services/filmsAPI'
 import CastDisplayer from '../components/displayers/CastDisplayer'
+import CastDetailsDisplayer from '../components/displayers/CastDetailsDisplayer'
 
 const Details = () => {
   const { filmId } = useParams()
@@ -141,7 +142,7 @@ const Details = () => {
               </TabList>
               <TabPanels>
                 <TabPanel>
-                  <CastDisplayer cast={cast}></CastDisplayer>
+                  <CastDetailsDisplayer cast={cast}></CastDetailsDisplayer>
                 </TabPanel>
                 <TabPanel>
                 pelis parecidas
