@@ -26,9 +26,9 @@ const FilmFilters = ({ handleClick }) => {
   }
 
   const handleCheckboxs = (input) => {
-    console.log(input)
     setSelectedGenres(input)
   }
+
   return (
     <Box
       padding={7}
