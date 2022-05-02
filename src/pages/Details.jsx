@@ -8,6 +8,8 @@ import Navbar from '../components/Navbar'
 import apiKey from '../services/filmsAPI'
 import CastDisplayer from '../components/displayers/CastDisplayer'
 import CastDetailsDisplayer from '../components/displayers/CastDetailsDisplayer'
+import FilmsDisplayer from '../components/displayers/FilmsDisplayer'
+import FilmsDetailsDisplayer from '../components/displayers/FilmsDetailsDisplayer'
 
 const Details = () => {
   const { filmId } = useParams()
@@ -15,6 +17,7 @@ const Details = () => {
   const [cast, setCast] = useState([])
   const [trailer, setTrailer] = useState([])
   const [isFavorite, setIsFavorite] = useState(false)
+  const [similarFilms, setSimilarFilms] = useState([])
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -79,11 +82,20 @@ const Details = () => {
       })
   }
 
+  const fetchSimiliarFilms = async () => {
+    fetch(`https://api.themoviedb.org/3/movie/${filmId}/similar?api_key=${apiKey}`)
+      .then(response => response.json())
+      .then(data => {
+        setSimilarFilms(data.results.slice(0, 10))
+      })
+  }
+
   useEffect(() => {
     fetchFavFilms()
     fetchFilmInfo()
     fetchCast()
     fetchTrailer()
+    fetchSimiliarFilms()
   }, [])
 
   return (
@@ -138,17 +150,13 @@ const Details = () => {
               <TabList >
                 <Tab>Cast</Tab>
                 <Tab>Similar films</Tab>
-                <Tab>Reviews</Tab>
               </TabList>
               <TabPanels>
                 <TabPanel>
                   <CastDetailsDisplayer cast={cast}></CastDetailsDisplayer>
                 </TabPanel>
                 <TabPanel>
-                pelis parecidas
-                </TabPanel>
-                <TabPanel>
-                reviews
+                  <FilmsDetailsDisplayer films={similarFilms}></FilmsDetailsDisplayer>
                 </TabPanel>
               </TabPanels>
             </Tabs>
