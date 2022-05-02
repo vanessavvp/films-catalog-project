@@ -12,7 +12,6 @@ const Discover = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [discoverResult, setDiscoverResult] = useState([])
-  const displayer = <FilmsDisplayer films={discoverResult}></FilmsDisplayer>
 
   const handleRightClick = () => {
     setCurrentPage(currentPage + 1)
@@ -31,12 +30,9 @@ const Discover = () => {
       .then(response => response.json())
       .then(data => { setTotalPages(data.total_pages); setDiscoverResult(data.results) })
   }
-  // if oage 1, flecha delante
-  // if page igual a la ultima fecha atras
-  // if page not ninguno de los dos, ambas flechas
+
   useEffect(() => {
     fetchDiscover()
-    // displayer = <FilmsDisplayer films={discoverResult}></FilmsDisplayer>
   }, [querys, currentPage])
 
   return (

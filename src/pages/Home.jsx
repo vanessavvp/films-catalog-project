@@ -6,6 +6,7 @@ import FilmsDisplayer from '../components/displayers/FilmsDisplayer'
 import CastDisplayer from '../components/displayers/CastDisplayer'
 import CompaniesDisplayer from '../components/displayers/CompaniesDisplayer'
 import apiKey from '../services/filmsAPI'
+import { Pagination } from '../components/Pagination'
 
 const Home = () => {
   const [cast, setCast] = useState([])
@@ -15,6 +16,8 @@ const Home = () => {
   const [filterParameter, setFilterParameter] = useState('film')
   const [nowPlaying, setNowPlaying] = useState([])
   const [popularFilms, setPopularFilms] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
 
   const handleSubmit = (input) => {
     setSearchInput(input)
@@ -24,42 +27,55 @@ const Home = () => {
     setFilterParameter(event.target.value)
   }
 
+  const handleRightClick = () => {
+    setCurrentPage(currentPage + 1)
+  }
+
+  const handleLeftClick = () => {
+    setCurrentPage(currentPage - 1)
+  }
+
   const fetchNowPlaying = async () => {
-    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&include_adult=false`)
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&include_adult=false&page=${currentPage}`)
       .then(response => response.json())
       .then(data => {
+        setTotalPages(data.total_pages)
         setNowPlaying(data.results)
       })
   }
 
   const fetchPopularFilms = async () => {
-    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&include_adult=false`)
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&include_adult=false&page=${currentPage}`)
       .then(response => response.json())
       .then(data => {
+        setTotalPages(data.total_pages)
         setPopularFilms(data.results)
       })
   }
 
   const fetchFilms = async () => {
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchInput}&include_adult=false`)
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchInput}&include_adult=false&page=${currentPage}`)
       .then(response => response.json())
       .then(data => {
+        setTotalPages(data.total_pages)
         setFilms(data.results)
       })
   }
 
   const fetchCast = async () => {
-    fetch(`https://api.themoviedb.org/3/search/person?api_key=${apiKey}&query=${searchInput}`)
+    fetch(`https://api.themoviedb.org/3/search/person?api_key=${apiKey}&query=${searchInput}&page=${currentPage}`)
       .then(response => response.json())
       .then(data => {
+        setTotalPages(data.total_pages)
         setCast(data.results)
       })
   }
 
   const fetchCompanies = async () => {
-    fetch(`https://api.themoviedb.org/3/search/company?api_key=${apiKey}&query=${searchInput}`)
+    fetch(`https://api.themoviedb.org/3/search/company?api_key=${apiKey}&query=${searchInput}&page=${currentPage}`)
       .then(response => response.json())
       .then(data => {
+        setTotalPages(data.total_pages)
         setCompanies(data.results)
       })
   }
@@ -75,15 +91,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchInfo()
-  }, [nowPlaying])
-
-  useEffect(() => {
-    fetchInfo()
-  }, [searchInput])
-
-  useEffect(() => {
-    fetchInfo()
-  }, [filterParameter])
+  }, [searchInput, filterParameter, currentPage])
 
   return (
     <Box>
@@ -115,9 +123,10 @@ const Home = () => {
               </TabPanel>
             </TabPanels>
           </Tabs> }
-        {(filterParameter === 'film') && (searchInput !== '') && <FilmsDisplayer search={searchInput} films={films} /> }
-        {(filterParameter === 'cast') && <CastDisplayer search={searchInput} cast={cast} /> }
-        {(filterParameter === 'companies') && <CompaniesDisplayer search={searchInput} companies={companies} /> }
+        <Pagination currentPage={currentPage} totalPages={totalPages} handleLeft={handleLeftClick} handleRight={handleRightClick}/>
+        {(filterParameter === 'film') && (searchInput !== '') && <><FilmsDisplayer search={searchInput} films={films} /><Pagination currentPage={currentPage} totalPages={totalPages} handleLeft={handleLeftClick} handleRight={handleRightClick} /></> }
+        {(filterParameter === 'cast') && <><CastDisplayer search={searchInput} cast={cast} /><Pagination currentPage={currentPage} totalPages={totalPages} handleLeft={handleLeftClick} handleRight={handleRightClick} /></> }
+        {(filterParameter === 'companies') && <><CompaniesDisplayer search={searchInput} companies={companies} /><Pagination currentPage={currentPage} totalPages={totalPages} handleLeft={handleLeftClick} handleRight={handleRightClick} /></> }
       </Stack>
     </Box>
   )
