@@ -20,11 +20,12 @@ const Searchbar = ({ onHandleSubmit }) => {
       justifyContent='center'
     >
       <Box w='800px'>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
           <Input
             variant='filled'
             placeholder='Search films, cast or production companies'
             onChange={handleChange}>
+
           </Input>
         </form>
       </Box>

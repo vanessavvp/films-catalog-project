@@ -4,17 +4,18 @@ import ItemCard from '../itemCard'
 const FilmsDisplayer = ({ search = '', films }) => {
   return (
     <Box
+      p={1}
       display='flex'
       justifyContent='center'
       alignItems='flex-start'
+      alignContent='stretch'
       flexWrap='wrap'
       rowGap='12px'
       columnGap='12px'
-      boxSize='100%'
-      marginLeft='6px'
     >
-      { (search !== '') ? (<Heading as='h3' size='l'>Results for: {search}</Heading>) : null }
-      { (search !== '') ? (<Divider w='95%'></Divider>) : null }
+      { (search !== '') && (<Heading as='h3' size='l'>Results for: {search}</Heading>) }
+      { (search !== '') && (<Divider w='95%' />) }
+
       {
         films?.map((film, index) => {
           return (<ItemCard key={index} img={film.poster_path} filmId={film.id}></ItemCard>)

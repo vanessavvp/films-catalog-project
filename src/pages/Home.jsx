@@ -91,17 +91,17 @@ const Home = () => {
       <Stack p={5}>
         <Box display='flex' justifyContent='center' alignItems='center'>
           <Searchbar onHandleSubmit={handleSubmit} />
-          <ButtonGroup variant='solid' colorScheme='purple'>
+          {(searchInput !== '') && <ButtonGroup variant='solid' colorScheme='purple'>
             <Button value='film' onClick={handleClick}>Films</Button>
             <Button value='cast' onClick={handleClick}>Cast</Button>
             <Button value='companies' onClick={handleClick}>Production companies</Button>
-          </ButtonGroup>
+          </ButtonGroup>}
+
         </Box>
         <Spacer />
         <Spacer />
-
-        {(searchInput === '')
-          ? <Tabs size='lg'align='center' variant='soft-rounded' colorScheme='blackAlpha'>
+        {(searchInput === '') &&
+          <Tabs size='lg'align='center' variant='solid-rounded' colorScheme='purple'>
             <TabList >
               <Tab>Now playing films</Tab>
               <Tab>Most popular films</Tab>
@@ -114,11 +114,10 @@ const Home = () => {
                 <FilmsDisplayer films={popularFilms}></FilmsDisplayer>
               </TabPanel>
             </TabPanels>
-          </Tabs>
-          : null}
-        {(filterParameter === 'film') ? <FilmsDisplayer search={searchInput} films={films} /> : null }
-        {(filterParameter === 'cast') ? <CastDisplayer search={searchInput} cast={cast} /> : null}
-        {(filterParameter === 'companies') ? <CompaniesDisplayer search={searchInput} companies={companies} /> : null}
+          </Tabs> }
+        {(filterParameter === 'film') && (searchInput !== '') && <FilmsDisplayer search={searchInput} films={films} /> }
+        {(filterParameter === 'cast') && <CastDisplayer search={searchInput} cast={cast} /> }
+        {(filterParameter === 'companies') && <CompaniesDisplayer search={searchInput} companies={companies} /> }
       </Stack>
     </Box>
   )

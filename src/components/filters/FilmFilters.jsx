@@ -36,7 +36,7 @@ const FilmFilters = ({ handleClick }) => {
       bg='#8e94f2'
       gap='20px'
       h='100%'
-      boxSize='20%'
+      boxSize='50%'
     >
       <GenreFilter handleOnChange={handleCheckboxs}></GenreFilter>
       <RatingFilter handleOnChangeEnd={handleOnChangeEnd}></RatingFilter>
