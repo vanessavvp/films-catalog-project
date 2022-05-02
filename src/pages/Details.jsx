@@ -86,7 +86,7 @@ const Details = () => {
     fetch(`https://api.themoviedb.org/3/movie/${filmId}/similar?api_key=${apiKey}`)
       .then(response => response.json())
       .then(data => {
-        setSimilarFilms(data.results.slice(0, 10))
+        setSimilarFilms(data.results?.slice(0, 5))
       })
   }
 
@@ -96,7 +96,7 @@ const Details = () => {
     fetchCast()
     fetchTrailer()
     fetchSimiliarFilms()
-  }, [])
+  }, [filmId])
 
   return (
     <Box >

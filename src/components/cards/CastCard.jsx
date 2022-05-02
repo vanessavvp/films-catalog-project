@@ -1,4 +1,4 @@
-import { Box, Image } from '@chakra-ui/react'
+import { Box, Image, Text } from '@chakra-ui/react'
 
 const CastCard = ({ img = '', castName = '' }) => {
   return (
@@ -8,7 +8,7 @@ const CastCard = ({ img = '', castName = '' }) => {
           (<Box maxWidth='200px' boxShadow='2xl' borderRadius='xl' overflow='hidden' borderWidth='1px' >
             <Image
               src={`http://image.tmdb.org/t/p/w500${img}`}
-              alt='Cast card' />{castName}
+              alt='Cast card' /><Text p='2px'align='center'>{castName}</Text>
           </Box>)
       }
     </Box>

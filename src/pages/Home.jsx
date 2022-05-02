@@ -25,6 +25,7 @@ const Home = () => {
 
   const handleClick = (event) => {
     setFilterParameter(event.target.value)
+    setCurrentPage(1)
   }
 
   const handleRightClick = () => {

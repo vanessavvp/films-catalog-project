@@ -6,6 +6,7 @@ const CastDetailsDisplayer = ({ search = '', cast }) => {
     <Box
       margin='20px'
       display='flex'
+      justifyContent='center'
       flexWrap='wrap'
       rowGap='12px'
       columnGap='12px'
