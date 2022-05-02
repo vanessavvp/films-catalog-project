@@ -35,7 +35,7 @@ const Discover = () => {
   return (
     <Box>
       <Navbar></Navbar>
-      <Stack p={10} >
+      <Stack p={10} margin={10}>
         <Heading as='h3' size='xl'>Discover films</Heading>
         <Divider />
         <Spacer></Spacer>

@@ -1,5 +1,6 @@
 import { Badge, Box, Button, Divider, Heading, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
-import { BiHeart, BiMoviePlay } from 'react-icons/bi'
+import { BiMoviePlay } from 'react-icons/bi'
+import { RiHeartAddLine, RiHeartAddFill } from 'react-icons/ri'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ItemCard from '../components/itemCard'
@@ -13,6 +14,7 @@ const Details = () => {
   const [filmInfo, setFilmInfo] = useState([])
   const [cast, setCast] = useState([])
   const [trailer, setTrailer] = useState([])
+  const [isFavorite, setIsFavorite] = useState(false)
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -44,12 +46,41 @@ const Details = () => {
       })
   }
 
+  const fetchPostFavoriteMovie = async () => {
+    const init = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ media_type: 'movie', media_id: filmId, favorite: !isFavorite })
+    }
+
+    fetch(`https://api.themoviedb.org/3/account/12289456/favorite?api_key=${apiKey}&session_id=${window.localStorage.getItem('session-ID')}`, init)
+      .then(response => setIsFavorite(!isFavorite))
+      .catch(error => {
+        console.error(error)
+        setIsFavorite(isFavorite)
+      })
+  }
+
+  const handleFavClick = async () => {
+    await fetchPostFavoriteMovie()
+  }
+
   const handleTrailerClick = () => {
     const path = `https://www.youtube.com/watch?v=${trailer}`
     window.location.href = path
   }
 
+  const fetchFavFilms = async () => {
+    fetch(`https://api.themoviedb.org/3/account/12289456/favorite/movies?api_key=${apiKey}&sort_by=created_at&session_id=${window.localStorage.getItem('session-ID')}`)
+      .then(response => response.json())
+      .then(data => {
+        const isFavFilm = data.results?.filter(film => film.id === parseInt(filmId))
+        if (isFavFilm.length > 0) setIsFavorite(true)
+      })
+  }
+
   useEffect(() => {
+    fetchFavFilms()
     fetchFilmInfo()
     fetchCast()
     fetchTrailer()
@@ -63,7 +94,7 @@ const Details = () => {
           <Box display='flex' flexDirection='column' wrap='wrap' gap='10px'>
             <ItemCard img={filmInfo.poster_path}></ItemCard>
             { trailer && <Button bg='black' w='300px' onClick={handleTrailerClick} rightIcon={<BiMoviePlay color='white'/>}><Text color='white'>Watch trailer</Text></Button> }
-            <Button w='300px' rightIcon={<BiHeart />}>Add to favorites</Button>
+            { !isFavorite ? <Button w='300px' onClick={handleFavClick} rightIcon={<RiHeartAddLine />}>Add to favorites</Button> : <Button w='300px' onClick={handleFavClick} rightIcon={<RiHeartAddFill />}>Erase from favorites</Button>}
           </Box>
           <Box display='flex' flexDirection='column'alignItems='flex-start'gap='20px' h='30%' w='70%'>
             <Heading as='h3' size='xl'>{filmInfo.original_title}</Heading>

@@ -12,6 +12,7 @@ const Favorites = () => {
     const data = response.json()
     return data.id
   }
+
   useEffect(() => {
     const fetchFavFilms = async () => {
       const sessionID = await fetchSessionID()
@@ -25,7 +26,7 @@ const Favorites = () => {
   return (
     <Box >
       <Navbar></Navbar>
-      <Stack p={10}>
+      <Stack p={10} margin={10}>
         <Heading as='h3' size='xl'>Favorites films</Heading>
         <Divider />
         <FilmsDisplayer films={favFilms}></FilmsDisplayer>

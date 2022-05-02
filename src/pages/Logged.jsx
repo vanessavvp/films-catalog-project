@@ -1,7 +1,6 @@
 import { Box, Button, Divider, Flex, Heading, Spacer, Stack, VStack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import Navbar from '../components/Navbar'
 import apiKey from '../services/filmsAPI'
 
 const Logged = () => {
@@ -16,7 +15,7 @@ const Logged = () => {
   }
 
   useEffect(() => {
-    const fetchCreateSessionID = async () => {
+    const fetchPostCreateSessionID = async () => {
       await fetch(`https://api.themoviedb.org/3/authentication/session/new?api_key=${apiKey}`, init)
         .then(response => response.json())
         .then(data => {
@@ -24,7 +23,7 @@ const Logged = () => {
           window.localStorage.removeItem('request-token')
         })
     }
-    fetchCreateSessionID()
+    fetchPostCreateSessionID()
   }, [])
 
   return (<Box >

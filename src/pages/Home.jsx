@@ -88,7 +88,7 @@ const Home = () => {
   return (
     <Box>
       <Navbar />
-      <Stack p={10}>
+      <Stack p={5}>
         <Box display='flex' justifyContent='center' alignItems='center'>
           <Searchbar onHandleSubmit={handleSubmit} />
           <ButtonGroup variant='solid' colorScheme='purple'>
