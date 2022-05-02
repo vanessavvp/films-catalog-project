@@ -27,7 +27,7 @@ const RatingFilter = ({ handleOnChangeEnd }) => {
           color='white'
           placement='bottom'
           isOpen={showTooltip}
-          label={`${sliderValue}%`}
+          label={sliderValue}
         >
           <SliderThumb />
         </Tooltip>

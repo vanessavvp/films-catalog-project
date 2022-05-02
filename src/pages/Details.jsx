@@ -6,9 +6,7 @@ import { useParams } from 'react-router-dom'
 import ItemCard from '../components/itemCard'
 import Navbar from '../components/Navbar'
 import apiKey from '../services/filmsAPI'
-import CastDisplayer from '../components/displayers/CastDisplayer'
 import CastDetailsDisplayer from '../components/displayers/CastDetailsDisplayer'
-import FilmsDisplayer from '../components/displayers/FilmsDisplayer'
 import FilmsDetailsDisplayer from '../components/displayers/FilmsDetailsDisplayer'
 
 const Details = () => {
@@ -18,6 +16,7 @@ const Details = () => {
   const [trailer, setTrailer] = useState([])
   const [isFavorite, setIsFavorite] = useState(false)
   const [similarFilms, setSimilarFilms] = useState([])
+  const [isLogged, setIsLogged] = useState(false)
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -96,6 +95,7 @@ const Details = () => {
     fetchCast()
     fetchTrailer()
     fetchSimiliarFilms()
+    setIsLogged(Boolean(window.localStorage.getItem('session-ID')))
   }, [filmId])
 
   return (
@@ -106,7 +106,13 @@ const Details = () => {
           <Box display='flex' flexDirection='column' wrap='wrap' gap='10px'>
             <ItemCard img={filmInfo.poster_path}></ItemCard>
             { trailer && <Button bg='black' w='300px' onClick={handleTrailerClick} rightIcon={<BiMoviePlay color='white'/>}><Text color='white'>Watch trailer</Text></Button> }
-            { !isFavorite ? <Button w='300px' onClick={handleFavClick} rightIcon={<RiHeartAddLine />}>Add to favorites</Button> : <Button w='300px' onClick={handleFavClick} rightIcon={<RiHeartAddFill />}>Erase from favorites</Button>}
+            {
+              isLogged
+                ? isFavorite
+                  ? <Button w='300px' onClick={handleFavClick} rightIcon={<RiHeartAddFill />}>Erase from favorites</Button>
+                  : <Button w='300px' onClick={handleFavClick} rightIcon={<RiHeartAddLine />}>Add to favorites</Button>
+                : null
+            }
           </Box>
           <Box display='flex' flexDirection='column'alignItems='flex-start'gap='20px' h='30%' w='70%'>
             <Heading as='h3' size='xl'>{filmInfo.original_title}</Heading>
