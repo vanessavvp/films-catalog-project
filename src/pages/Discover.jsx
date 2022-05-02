@@ -1,5 +1,4 @@
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-import { Box, Button, Divider, Heading, Spacer, Stack } from '@chakra-ui/react'
+import { Box, Divider, Heading, Spacer, Stack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import FilmsDisplayer from '../components/displayers/FilmsDisplayer'
 import FilmFilters from '../components/filters/FilmFilters'
