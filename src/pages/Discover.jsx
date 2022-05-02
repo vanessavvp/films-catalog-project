@@ -12,17 +12,9 @@ const Discover = () => {
   const [totalPages, setTotalPages] = useState(1)
   const [discoverResult, setDiscoverResult] = useState([])
 
-  const handleRightClick = () => {
-    setCurrentPage(currentPage + 1)
-  }
-
-  const handleLeftClick = () => {
-    setCurrentPage(currentPage - 1)
-  }
-
-  const handleClick = (input) => {
-    setQuerys(input)
-  }
+  const handleRightClick = () => setCurrentPage(currentPage + 1)
+  const handleLeftClick = () => setCurrentPage(currentPage - 1)
+  const handleClick = (input) => setQuerys(input)
 
   const fetchDiscover = () => {
     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}${querys}&include_adult=false&page=${currentPage}`)
