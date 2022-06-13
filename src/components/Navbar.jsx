@@ -33,11 +33,13 @@ const Navbar = () => {
         <Heading as='h1' size='3xl'><Link to='/'>Films catalog.</Link></Heading>
         <Spacer></Spacer>
         <ButtonGroup variant='solid' spacing='6' color='#6247aa' size='lg'>
-          <Button><Link to='/'>Home</Link></Button>
-          <Button><Link to='/discover'>Discover</Link></Button>
-          { isUserLogged && <Button><Link to='/favorites'>Favorites</Link></Button> }
+          <Link to='/'><Button>Home</Button></Link>
+          <Link to='/discover'><Button>Discover</Button></Link>
+          { isUserLogged && <Link to='/favorites'><Button>Favorites</Button></Link> }
           {
-            isUserLogged ? <Button variant='outline' colorScheme='purple' rightIcon={<BiUser />} onClick={handleLogOut}>Log out</Button> : <Button variant='outline' colorScheme='purple' rightIcon={<BiUser />} onClick={handleLogIn}>Log in</Button>
+            isUserLogged
+              ? <Button variant='outline' colorScheme='purple' rightIcon={<BiUser />} onClick={handleLogOut}>Log out</Button>
+              : <Button variant='outline' colorScheme='purple' rightIcon={<BiUser />} onClick={handleLogIn}>Log in</Button>
           }
         </ButtonGroup>
       </Flex>
