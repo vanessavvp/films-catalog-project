@@ -76,8 +76,9 @@ const Details = () => {
     fetch(`https://api.themoviedb.org/3/account/12289456/favorite/movies?api_key=${apiKey}&sort_by=created_at&session_id=${window.localStorage.getItem('session-ID')}`)
       .then(response => response.json())
       .then(data => {
-        const isFavFilm = data.results?.filter(({ id }) => id === parseInt(filmId))
+        const isFavFilm = data.results.filter(({ id }) => id === parseInt(filmId))
         if (isFavFilm.length > 0) setIsFavorite(true)
+        else setIsFavorite(false)
       })
   }
 
@@ -98,6 +99,7 @@ const Details = () => {
     setIsLogged(Boolean(window.localStorage.getItem('session-ID')))
   }, [filmId])
 
+  if (isLogged) fetchFavFilms()
   return (
     <Box >
       <Navbar></Navbar>

@@ -8,10 +8,12 @@ const ItemCard = ({ img = '', filmId = '' }) => {
     <Box>
       {
         img &&
-          (<Box w='300px' cursor='pointer' boxShadow='2xl' borderRadius='xl' overflow='hidden' borderWidth='1px' onClick={() => filmId !== '' && navigate(`/details/${filmId}`) }>
+          (<Box display='flex' alignContent='center' width='300px' height='450px' cursor='pointer' boxShadow='2xl' borderRadius='xl' overflow='hidden' borderWidth='1px' onClick={() => filmId !== '' && navigate(`/details/${filmId}`) }>
             <Image
               src={`http://image.tmdb.org/t/p/w500${img}`}
-              alt='Item card' />
+              alt='Item card'
+              objectFit='contain'
+            />
           </Box>)
       }
     </Box>
