@@ -1,4 +1,4 @@
-# **Theam frontend project**
+# **Films catalog project**
 ### :movie_camera: [Project Page](https://films-catalog-project.vercel.app/)
 #### Author: Vanessa Valentina Villalba Pérez
 
